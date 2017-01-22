@@ -22,8 +22,8 @@
 
         public function add($user) {
             $conn = getDBConnection();
-            $sql = "INSERT INTO users(null, login, password, avatar, nationality, skills, aboutme) VALUES ";
-            $sql .= "($user->id, '$user->login', '$user->password', '$user->avatar', '$user->nationality', '$user->skills', '$user->aboutme')";
+            $sql = "INSERT INTO users(id, login, password, avatar, nationality, skills, aboutme) VALUES ";
+            $sql .= "(null, '$user->login', '$user->password', '$user->avatar', '$user->nationality', '$user->skills', '$user->aboutme')";
             $result = $conn->query($sql);
             return $result;
         }
