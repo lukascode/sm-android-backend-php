@@ -18,7 +18,8 @@
         case 'POST':
             $lp = json_decode(file_get_contents('php://input'));
             $user = $userdao->getLP($lp->login, $lp->password);
-            echo json_encode($user);
+            if($user != null) echo json_encode($user);
+            else echo '{}';
         break;
     }
 

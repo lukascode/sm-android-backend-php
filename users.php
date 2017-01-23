@@ -23,9 +23,14 @@
         case 'POST':
             $user = json_decode(file_get_contents('php://input'));
             $user->avatar = '';
-            $result = $userdao->add($user);
-            if($result == true) http_response_code(201);
+            $user = $userdao->add($user);
+            $response_json = '{}';
+            if($user != null)  {
+                http_response_code(201);
+                $response_json = json_encode($user);
+            }
             else http_response_code(500);
+            echo $response_json;
         break;
     }
  ?>

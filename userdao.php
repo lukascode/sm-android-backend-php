@@ -25,7 +25,10 @@
             $sql = "INSERT INTO users(id, login, password, avatar, nationality, skills, aboutme) VALUES ";
             $sql .= "(null, '$user->login', '$user->password', '$user->avatar', '$user->nationality', '$user->skills', '$user->aboutme')";
             $result = $conn->query($sql);
-            return $result;
+            $uid = $conn->insert_id;
+            $user_saved = $this->get($uid);
+            $conn->close();
+            return $user_saved;
         }
 
         public function delete($id) {
