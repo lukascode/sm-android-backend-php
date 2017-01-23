@@ -42,13 +42,14 @@
         }
 
         public function add($message) {
-            $result = true;
             $conn = getDBConnection();
             $sql = "INSERT INTO messages(id, id_sender, id_receiver, message) VALUES ".
             "(null, $message->id_sender, $message->id_receiver, '$message->message')";
-            if($conn->query($sql) === FALSE) { $result = false; }
+            $conn->query($sql);
+            $mid = $conn->insert_id;
+            $message_saved = $this->get($mid);
             $conn->close();
-            return $result;
+            return $message_saved;
         }
 
     }

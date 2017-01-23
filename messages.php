@@ -27,9 +27,14 @@
         case 'POST':
             $message = json_decode(file_get_contents('php://input'));
             $rmessage = new Message(0, $message->id_sender, $message->id_receiver, $message->message);
-            $result = $messagedao->add($rmessage);
-            if($result == true) http_response_code(201);
+            $message = $messagedao->add($rmessage);
+            $response_json = '{}';
+            if($message != null) {
+                http_response_code(201);
+                $response_json = json_encode($message);
+            }
             else http_response_code(500);
+            echo $response_json;
         break;
     }
 
