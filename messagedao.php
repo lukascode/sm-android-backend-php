@@ -21,7 +21,7 @@
         public function getMessages($who, $id) {
             $conn = getDBConnection();
             $messages = array();
-            $sql = "SELECT * FROM messages WHERE $who=".$id;
+            $sql = "SELECT * FROM messages WHERE $who=".$id." ORDER BY ts DESC";
             $result = $conn->query($sql);
             if($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
